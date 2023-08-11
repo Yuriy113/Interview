@@ -65,8 +65,33 @@
 - #### Functional Scope
 
   - Know global scope and functional scope
+
+    **Global scope:**
+
+    The global scope refers to the outermost level of your JavaScript code, outside of any function or block. Variables declared in the global scope are accessible from any part of your code, including inside functions and other blocks. These variables are often referred to as global variables.
+
+    **Functional Scope:**
+
+    Functional scope, also known as local scope, refers to the scope created within a function. Variables declared within a function are only accessible within that function, and they are not visible outside of it. This helps encapsulate variables and avoid conflicts between different parts of your code.  
+    Variables declared in a functional scope are isolated from the global scope and from other functional scopes.
+
   - Know variables visibility areas
+
+    **Block Scope:**
+
+    Introduced in ECMAScript 6 (ES6), block scope refers to the scope of variables declared using let and const within blocks (enclosed by curly braces {}), including loops and conditional statements. These variables are not accessible outside of the block where they are defined.
+
+    **Functional Scope:**
+
+    Functional scope refers to the scope of variables declared using var and parameters of functions. These variables are accessible within the function in which they are defined, as well as any nested functions.
+
+    **Global Scope:**
+
+    Global scope refers to the outermost level of your JavaScript code, outside of any function or block. Variables declared without any specific keyword (such as let, const, or var) become global variables and are accessible from anywhere in your code.
+
   - Understand nested scopes and able work with them
+
+  ***
 
 - #### Functions Parameters / Arguments
 
