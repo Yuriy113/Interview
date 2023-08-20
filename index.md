@@ -91,13 +91,35 @@
 
   - Understand nested scopes and able work with them
 
-  ***
+    Nested scopes occur when one scope is defined within another. In JavaScript, this often happens with functions and blocks (loops or conditionals) that are defined within other functions or blocks. Understanding and working with nested scopes is crucial for managing variable visibility and preventing unintended conflicts. Here's how you can work with nested scopes:
+
+    Variable Access: Inner scopes can access variables from outer scopes, but the reverse is not true. Variables declared in an outer scope are visible to inner scopes, but variables declared in an inner scope are not accessible in outer scopes.
+
+    Shadowing: If an inner scope declares a variable with the same name as a variable in an outer scope, the inner variable "shadows" the outer one within that inner scope. The outer variable remains unaffected.
+
+    Lexical Scoping: JavaScript uses lexical scoping, meaning that the visibility of a variable is determined by its position in the source code's hierarchy of scopes. Inner scopes "remember" their outer scopes even if they are executed elsewhere.
+
+    Closure: A closure is created when an inner function accesses variables from an outer function. The inner function "closes over" the variables it references, preserving their values even after the outer function has completed execution.
+
+---
 
 - #### Functions Parameters / Arguments
 
   - Know how to define Function parameters
+
+    The Javascript Function **Parameters** are the names that are defined in the function definition and real values passed to the function in the function definition are known as **arguments**.
+
+    The default parameters are used to initialize the named parameters with default values in case, when no value or undefined is passed.
+
   - Know difference between parameters passing by value and by reference
+
+    **Arguments Pass by Value**: In a function call, the parameters are called as arguments. The pass-by value sends the value of the variable to the function. It does not send the address of the variable. If the function changes the value of arguments then it does not affect the original value.
+
+    **Objects passed by Reference**: In Objects Pass by Reference, passing the address of the variable instead of the value as the argument to call the Function. If we change the value of the variable inside the function then it will affect outside function variables.
+
   - Know how to handle dynamic amount of Function parameters
+
+    `{...rest}` or `arguments`
 
 - #### Closures Advanced
 
