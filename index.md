@@ -1,10 +1,3 @@
-<style>
-  main {
-    background-color: black;
-    color: white;
-  }
-</style>
-
 <main>
 
 # CoreJS Interview #2
@@ -190,13 +183,42 @@
 - #### ECMAScript Intermediate
 
   - Function default parameters
+
+    Function default parameters allow you to specify default values for function arguments. If an argument is not provided when calling the function, it will take the default value.
+
   - Know how to use spread operator for Function arguments
+
+    The spread operator `(...)` can be used to pass an array of values as individual arguments to a function. This is helpful when you have an array and want to use its elements as function arguments.
+
+        function sum(x, y, z) {
+          return x + y + z;
+        }
+        const numbers = [1, 2, 3];
+        console.log(sum(...numbers)); // Outputs: 6
+
   - Be able to compare `arguments` and `rest parameters`
+
   - Spread operator for Array
-  - Understand and able to use spread operator for Array concatenation
+
+    The spread operator can be used to create a shallow copy of an array or to merge multiple arrays into one. It's denoted as ...arrayName.
+
+  - Understand and able to use spread operator for Array
+    concatenation
+
   - Destructuring assignment
+
   - Be able to discover destructuring assignment concept
+
   - Understand variables and Function arguments destructuring assignment
+
+    You can destructure objects or arrays both in variable declarations and function parameters. When used with function parameters, it allows you to directly extract and use specific values from the function's arguments, making your code more readable and expressive.
+
+        function greet({ name, age }) {
+          console.log(`Hello, ${name}! You are ${age} years old.`);
+        }
+        const person = { name: "Alice", age: 25 };
+        greet(person); // Outputs: Hello, Alice! You are 25 years old.
+
   - Know how `for..of` loop works `(optional)`
 
     1. Когда цикл for..of запускается, он вызывает этот метод (Symbol.iterator) один раз (или выдаёт ошибку, если метод не найден). Этот метод должен вернуть итератор – объект с методом `next`.
@@ -413,5 +435,3 @@
   Example:
   `periodOutput(100) -> 100(after 100 ms), 200(after 100 ms), 300(after 100 ms), ...`
 - `extendedPeriodOutput(period)` method should output in the console once per period how mach time has passed since the first function call and then increase the period. Example: `// extendedPeriodOutput(100) -> 100(after 100 ms), 200(after 200 ms), 300(after 300 ms)`
-
-</main>
