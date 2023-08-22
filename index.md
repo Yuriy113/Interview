@@ -124,11 +124,57 @@
 - #### Closures Advanced
 
   - Context (lexical environment)
+
+    The best way to think of an execution context is as a _stack frame_, while lexical environments are indeed the _scopes_.
+
+    The respective spec chapters ([§8.1 Lexical Environments](http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environments) and [§8.3 Execution Contexts](http://www.ecma-international.org/ecma-262/6.0/#sec-execution-contexts) ) explain:
+
+    Execution contexts contain the current evaluation state of code, a reference to the code (function) itself, and possibly references to the current lexical environments.
+    Execution contexts are managed in a stack.
+
+    Lexical environments contain an environment record in which the variables are stored, and a reference to their parent environment (if any).
+    Lexical environments build a tree structure.
+    With every change of the execution context, the lexical environment changes as well. However the lexical environment may change independently from that as well, for example when entering a block.
+
   - Understand function creation context (lexical environment)
+
+    В JavaScript у каждой выполняемой функции, блока кода {...} и скрипта есть связанный с ними внутренний (скрытый) объект, называемый лексическим окружением LexicalEnvironment.
+
+    Объект лексического окружения состоит из двух частей:
+
+    Environment Record – объект, в котором как свойства хранятся все локальные переменные (а также некоторая другая информация, такая как значение this).
+
+    Ссылка на внешнее лексическое окружение – то есть то, которое соответствует коду снаружи (снаружи от текущих фигурных скобок).
+
+    "Переменная" – это просто свойство специального внутреннего объекта: Environment Record. «Получить или изменить переменную», означает, «получить или изменить свойство этого объекта».
+
+    У глобального лексического окружения нет внешнего окружения, так что она указывает на null. По мере выполнения кода лексическое окружение меняется.
+
   - Be able to explain difference between scope and context
+
+    Scope refers to the visibility and accessibility of variables within a function, while context (lexical environment) includes both the scope and the specific values of variables at a given point in code execution.
+
   - Inner/outer lexical environment
+
+    Inner lexical environments have access to variables in their outer lexical environments, but the reverse is not true. This is known as lexical scope.
+
   - Understand lexical environment traversing mechanism
+
+    When a variable is referenced, JavaScript looks in the current lexical environment first. If it's not found, it traverses through outer lexical environments until the variable is found or the global environment is reached.
+
   - Understand connection between function and lexical environment
+
+    When a JavaScript function is created, it captures its surrounding lexical environment. This means it remembers the values of variables in its outer scope, even if it's executed later in a different context.
+
+    This behavior is what enables the creation of closures, where a function retains access to the variables of the lexical environment in which it was defined. Closures are a powerful feature for maintaining data privacy and creating flexible, reusable code structures.
+
+    Use Cases:
+
+    Closures: It enables you to create closures, which are functions that remember their lexical environments, providing data encapsulation and maintaining state.
+
+    Scope Management: It allows you to manage variable scope effectively, avoiding unintended variable clashes and ensuring that variables are accessible where and when you need them.
+
+    Modular Code: It facilitates the creation of modular and reusable code by encapsulating data within functions and providing controlled access to that data through closures.
 
   ***
 
