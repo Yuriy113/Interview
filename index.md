@@ -425,6 +425,26 @@
 
 - `Function.prototype.bind` implement polyfill
 - `Object.create` implement polyfill
+
+      Object.creates = function (obj) {
+        function Constructor() {}
+        Constructor.prototype = obj;
+        return new Constructor();
+      };
+
+      const person = {
+        isHuman: false,
+        printIntroduction: function () {
+          console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+        },
+      };
+
+      const me = Object.creates(person);
+      me.name = 'Matthew';
+      me.isHuman = true;
+      me.printIntroduction(); // Expected output: "My name is Matthew. Am I human? true"
+      console.log(me.__proto__); // Object { isHuman: false, printIntroduction: [Function: printIntroduction] }
+
 - `Array.flat` implement polyfill
 - `Array.reduce` implement polyfill
 - `'hello world'.repeating(3)` -> 'hello world hello world hello world'. How to implement?
