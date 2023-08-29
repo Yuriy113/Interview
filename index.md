@@ -304,9 +304,36 @@
 - #### ECMAScript Advanced
 
   - Promises
+
+    Объект `Promise` используется для отложенных и асинхронных вычислений.  
+    1 параметр: `executor` - объект функции с двумя аргументами `resolve` и `reject`.  
+     Функция _executor_ получает оба аргумента и выполняется сразу, ещё до того как конструктор вернёт созданный объект. Первый аргумент (`resolve`) вызывает успешное исполнение промиса, второй (`reject`) отклоняет его. Обычно функция executor описывает выполнение какой-то асинхронной работы, по завершении которой необходимо вызвать функцию `resolve` или `reject`. Обратите внимание, что возвращаемое значение функции `executor` игнорируется.
+
   - Promise states
+
+    `Promise` может находиться в трёх состояниях:
+
+    - ожидание (_pending_): начальное состояние, не исполнен и не отклонён.
+    - исполнено (_fulfilled_): операция завершена успешно.
+    - отклонено (_rejected_): операция завершена с ошибкой.
+
+    При создании промис находится в ожидании (_pending_), а затем может стать исполненным (_fulfilled_), вернув полученный результат (значение), или отклонённым (_rejected_), вернув причину отказа. В любом из этих случаев вызывается обработчик, прикреплённый к промису методом then.
+
   - Promise chaining
+
+    Так как методы `Promise.prototype.then()` и `Promise.prototype.catch()` сами возвращают промис, их можно вызывать цепочкой, создавая соединения.
+
   - Promise static methods
+
+    `Promise.all(promises)` – ожидает выполнения всех промисов и возвращает массив с результатами. Если любой из указанных промисов вернёт ошибку, то результатом работы Promise.all будет эта ошибка, результаты остальных промисов будут игнорироваться.  
+    `Promise.allSettled(promises)` (добавлен недавно) – ждёт, пока все промисы завершатся и возвращает их результаты в виде массива с объектами, у каждого объекта два свойства:  
+    status: "`fulfilled`", если выполнен успешно или "`rejected`", если ошибка,
+    `value` – результат, если успешно или `reason` – ошибка, если нет.  
+    `Promise.race(promises)` – ожидает первый выполненный промис, который становится его результатом, остальные игнорируются.  
+    `Promise.any(promises)` (добавлен недавно) – ожидает первый успешно выполненный промис, который становится его результатом, остальные игнорируются. Если все переданные промисы отклонены, `AggregateError` становится ошибкой `Promise.any`.  
+    `Promise.resolve(value)` – возвращает успешно выполнившийся промис с результатом `value`.  
+    `Promise.reject(error)` – возвращает промис с ошибкой `error`.
+
   - Be able to compare promise and callback patterns `(optional)`
   - Be able to handle errors in promises
   - async/await
@@ -318,7 +345,73 @@
 - #### Global object window
 
   - Location
+
+    Интерфейс `Location` представляет местоположение (URL-адрес) объекта, с которым он связан. Изменения, внесенные в него, отражаются на объекте, к которому он относится. И интерфейс `Document`, и `Window` имеют такое связанное местоположение, доступное через `Document.location` и `Window`.location соответственно.
+
   - Know browser location structure
+
+    `Location.ancestorOrigins`  
+    A static DOMStringList containing, in reverse order, the origins of all ancestor browsing contexts of the document associated with the given Location object.
+
+    `Location.href`  
+    A stringifier that returns a string containing the entire URL. If changed, the associated document navigates to the new page. It can be set from a different origin than the associated document.
+
+        https://developer.mozilla.org:8080/en-US/search?q=URL#search-results-close-container
+
+    `Location.protocol`  
+    A string containing the protocol scheme of the URL, including the final ':'.
+
+        // https:
+
+    `Location.host`  
+    A string containing the host, that is the hostname, a ':', and the port of the URL.
+
+        developer.mozilla.org:8080
+
+    `Location.hostname`  
+    A string containing the domain of the URL.
+
+        developer.mozilla.org
+
+    `Location.port`  
+    A string containing the port number of the URL.
+
+        8080
+
+    `Location.pathname`  
+    A string containing an initial '/' followed by the path of the URL, not including the query string or fragment.
+
+        /en-US/search
+
+    `Location.search`  
+    A string containing a '?' followed by the parameters or "querystring" of the URL. Modern browsers provide URLSearchParams and URL.searchParams to make it easy to parse out the parameters from the querystring.
+
+        ?q=URL
+
+    `Location.hash`  
+    A string containing a '#' followed by the fragment identifier of the URL.
+
+        #search-results-close-container
+
+    `Location.origin` (Read only)  
+    Returns a string containing the canonical form of the origin of the specific location.
+
+        https://developer.mozilla.org:8080
+
+    Instance methods
+
+    `Location.assign()`
+    Loads the resource at the URL provided in parameter.
+
+    `Location.reload()`
+    Reloads the current URL, like the Refresh button.
+
+    `Location.replace()`
+    Replaces the current resource with the one at the provided URL (redirects to the provided URL). The difference from the `assign()` method and setting the `href` property is that after using `replace()` the current page will not be saved in session `History`, meaning the user won't be able to use the back button to navigate to it.
+
+    `Location.toString()`
+    Returns a string containing the whole URL. It is a synonym for `Location.href`, though it can't be used to modify the value.
+
   - History API (Global object window)
   - Know browser History APIconcept
   - Be able to navigate within browser history
