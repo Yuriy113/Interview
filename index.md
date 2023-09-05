@@ -1,5 +1,3 @@
-<main>
-
 # CoreJS Interview #2
 
 ## Question examples:
@@ -433,10 +431,42 @@
      Вы можете прослушивать событие `popstate`, чтобы определять, когда пользователь просматривает свою историю, а затем соответствующим образом обрабатывать изменения состояния.
 
   - Be able to use history state `(optional)`
+
+    API истории позволяет связывать данные о состоянии с каждой записью истории, что может быть полезно для сохранения состояния приложения при навигации между страницами или состояниями в одностраничном приложении (SPA).  
+    Чтобы использовать состояние истории, вы можете передать объект в качестве первого параметра методам `pushState()` или `replaceState()`. Этот объект может содержать любые данные, которые вы хотите связать с состоянием.
+
+        const stateData = { page: 'page2', someData: 'example' };
+        window.history.pushState(stateData, 'Page 2', '/page2');
+
+    Позже, когда пользователь перейдет в это состояние, вы сможете получить доступ к данным состояния в событии `popstate`, чтобы обновить пользовательский интерфейс вашего приложения или выполнить другие действия на основе состояния.
+
   - Navigator `(optional)`
+
+    Объект Navigator в JavaScript предоставляет информацию о браузере и системе пользователя. Он доступен через window.navigator.  
+    Общие свойства и методы объекта Navigator включают:  
+    `navigator.userAgent`: это свойство содержит строку User-Agent, которую можно использовать для идентификации браузера и операционной системы пользователя.  
+    `navigator.platform`: это свойство указывает платформу или операционную систему, на которой работает браузер.  
+    `navigator.appName` и `navigator.appVersion`: эти свойства предоставляют информацию об имени и версии браузера.
+
   - Know how to parse user agent `(optional)`
+
+    Parsing the User-Agent string can help you identify the user's browser, operating system, and other device-related information.  
+    You can use regular expressions or dedicated libraries to parse the User-Agent string and extract specific details.  
+    Example using a regular expression:
+
+        const userAgent = navigator.userAgent;
+        const isChrome = /Chrome/.test(userAgent); // true
+        const isWindows = /Windows/.test(userAgent); // true
+
   - Know how to discover client platform, browser
+
+    Чтобы узнать платформу (операционную систему) и браузер клиента, вы можете использовать свойства `navigator.platform` и `navigator.userAgent` соответственно, как упоминалось ранее. Вы также можете использовать библиотеки и службы, которые предоставляют более подробную информацию на основе строки User-Agent. Например, вы можете использовать библиотеку Platform.js или API-интерфейсы, такие как «Userstack», чтобы получить подробную информацию об устройстве и браузере клиента.
+
   - Cookies
+
+    Файлы cookie — это небольшие фрагменты данных, которые могут храниться в браузере пользователя и обычно используются для сохранения информации между веб-запросами или сеансами.  
+    В JavaScript вы можете работать с файлами cookie, используя свойство `document.cookie` для установки, чтения или удаления файлов cookie.  
+    Важно отметить, что файлы cookie имеют ограничения с точки зрения емкости хранилища и безопасности, и существуют альтернативные подходы, такие как веб-хранилище (localStorage и sessionStorage) и IndexedDB, для более современной и безопасной обработки данных.
 
 - #### Page Lifecycle
 
