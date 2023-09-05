@@ -292,19 +292,91 @@
 - #### JavaScript Errors
 
   - JavaScript Errors (throw, Error class)
+
+    В JavaScript ошибки — это проблемы, возникающие во время выполнения программы. Это могут быть синтаксические ошибки или ошибки времени выполнения.  
+    Оператор `throw` используется для создания пользовательской ошибки или создания предопределенного объекта ошибки. Например:
+
+        throw new Error('This is a custom error');
+
+    Объекты ошибок содержат следующие свойства:  
+    _message_ – понятное человеку сообщение.  
+    _name_ – строка с именем ошибки (имя конструктора ошибки).  
+    _stack_ (нестандартное, но хорошо поддерживается) – стек на момент ошибки.
+
+    Error types:
+
+    **RangeError** Creates an instance representing an error that occurs when a numeric variable or parameter is outside its valid range.  
+    **ReferenceError** Creates an instance representing an error that occurs when de-referencing an invalid reference.
+
+        const sum = c + 3; // Uncaught ReferenceError: c is not defined
+
+        func(); // Uncaught ReferenceError: func is not defined
+
+    **SyntaxError** Creates an instance representing a syntax error.
+
+    **TypeError** Creates an instance representing an error that occurs when a variable or parameter is not of a expected type.
+
+    When attempting to modify a value that can not be changed:
+
+        const num = 42;
+        num = 100; // Uncaught TypeError: Assignment to constant variable.
+
+    When attempting to use a value in an appropriate way:
+
+        const obj = {a: 1};
+        obj() // Uncaught TypeError: obj is not a function
+
   - `try..catch` statement
+
+    Оператор `try...catch` используется для обработки ошибок в JavaScript. Он позволяет вам обернуть блок кода в блок try и указать один или несколько блоков catch для обработки возможных исключений. Если в блоке `try` возникает ошибка, управление передается соответствующему блоку `catch`, где вы можете обработать ошибку.
+
   - Error handling
+
+    Обработка ошибок — это процесс корректной обработки ошибок или исключений, которые могут возникнуть во время выполнения программы.  
+    Правильная обработка ошибок помогает предотвратить сбои и обеспечивает обратную связь с пользователем или регистрирует ошибки для отладки.  
+    Помимо `try...catch`, вы можете использовать такие методы, как блоки `finally`, чтобы гарантировать выполнение определенного кода независимо от возникновения ошибки.
+
   - Error class
+
+    В JavaScript есть встроенный класс Error, который служит базовым классом для всех типов ошибок.  
+    Вы можете создавать собственные объекты ошибок, расширяя класс Error или используя его предопределенные подклассы, такие как SyntaxError, TypeError или ReferenceError.  
+    Пользовательские классы ошибок могут быть полезны для более конкретной обработки ошибок в вашем коде.
+
   - error logging
+
+    Логирование ошибок — это практика записи ошибок, возникающих в приложении, в целях отладки и мониторинга.  
+    Вы можете логировать ошибки в консоль, в файл или отправлять их на сервер для анализа.  
+    Даже если у нас нет `try..catch`, большинство сред позволяют настроить «глобальный» обработчик ошибок, чтобы ловить ошибки, которые «выпадают наружу». В браузере это `window.onerror`, в Node.js это `process.on("uncaughtException")`
+
   - async error events
+
+    В асинхронном JavaScript обработка ошибок может оказаться сложной задачей, поскольку `try..catch` работает синхронно. Чтобы поймать исключение внутри запланированной функции, try..catch должен находиться внутри самой этой функции  
+    Вы можете использовать блоки `try...catch` внутри асинхронных функций или использовать Promise.catch() или async/await для обработки ошибок в асинхронном коде.  
+    Кроме того, вы можете прослушивать событие `unhandledrejection`, чтобы перехватывать необработанные отклонения промисов.
+
   - Custom errors `(optional)`
+
+    Пользовательские классы ошибок часто создаются путем расширения встроенного класса Error для предоставления более конкретной информации об ошибках и облегчения обработки ошибок.  
+    Пользовательские ошибки могут включать дополнительные свойства и методы для передачи контекста и повышения информативности обработки ошибок.  
+    Пример создания собственного класса ошибок:
+
+        class MyCustomError extends Error {
+          constructor(message) {
+            super(message);
+            this.name = 'MyCustomError';
+          }
+        }
+
+    Оператор `throw` генерирует ошибку. Технически в качестве объекта ошибки можно передать что угодно. Это может быть даже примитив, число или строка, но всё же лучше, чтобы это был объект, желательно со свойствами name и message (для совместимости со встроенными ошибками).
+
+    В JavaScript есть встроенные конструкторы для стандартных ошибок: Error, SyntaxError, ReferenceError, TypeError и другие. Можно использовать и их для создания объектов ошибки.
 
 - #### ECMAScript Advanced
 
   - Promises
 
     Объект `Promise` используется для отложенных и асинхронных вычислений.  
-    1 параметр: `executor` - объект функции с двумя аргументами `resolve` и `reject`.  
+    Единственный параметр: `executor` - объект функции с двумя аргументами `resolve` и `reject`.  
      Функция _executor_ получает оба аргумента и выполняется сразу, ещё до того как конструктор вернёт созданный объект. Первый аргумент (`resolve`) вызывает успешное исполнение промиса, второй (`reject`) отклоняет его. Обычно функция executor описывает выполнение какой-то асинхронной работы, по завершении которой необходимо вызвать функцию `resolve` или `reject`. Обратите внимание, что возвращаемое значение функции `executor` игнорируется.
 
   - Promise states
@@ -534,10 +606,10 @@
 ### Testing `(optional)`
 
 - Testing Types
-  - Integration Testing
-  - E2E
-  - Security Testing
-  - Perforamance Testing
+- Integration Testing
+- E2E
+- Security Testing
+- Perforamance Testing
 - Test Pyramid
 - Testing approaches `(optional)`
 - FIRST
