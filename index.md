@@ -62,6 +62,8 @@
           console.log(key);
         }
 
+---
+
 - #### Functional Scope
 
   - Know global scope and functional scope
@@ -121,6 +123,8 @@
 
     `{...rest}` or `arguments`
 
+---
+
 - #### Closures Advanced
 
   - Context (lexical environment)
@@ -176,7 +180,7 @@
 
     Modular Code: It facilitates the creation of modular and reusable code by encapsulating data within functions and providing controlled access to that data through closures.
 
-  ***
+---
 
 - #### ECMAScript Intermediate
 
@@ -224,15 +228,17 @@
     3. Когда `for..of` хочет получить следующее значение, он вызывает метод `next()` этого объекта.
     4. Результат вызова `next()` должен иметь вид `{done: Boolean, value: any}`, где `done=true` означает, что цикл завершён, в противном случае value содержит очередное значение.
 
-    ***
+---
 
-  #### Modules in JavaScript
+#### Modules in JavaScript
 
-  - What is module / module pattern? For what purposes they were created?
-  - Modules types (AMD, ES6, CommonJS, UMD).
-  - Modules syntax.
-  - Common modules features (export default, named exports, exports as, etc).
-  - Dynamic imports.
+- What is module / module pattern? For what purposes they were created?
+- Modules types (AMD, ES6, CommonJS, UMD).
+- Modules syntax.
+- Common modules features (export default, named exports, exports as, etc).
+- Dynamic imports.
+
+---
 
 - #### Advanced Functions
 
@@ -246,6 +252,8 @@
   - Know how to bind `this` scope to function
   - Binding, binding one function twice
 
+---
+
 - #### Functional Patterns
 
   - Callback (Function as argument)
@@ -253,6 +261,8 @@
   - Know IIFE pattern `(optional)`
   - Understand callback limitations (callback hell) `(optional)`
   - Carrying and partial functions
+
+---
 
 - #### Object Oriented Programming
 
@@ -265,6 +275,8 @@
   - Know how to create public/static/private members
   - Understand OOP emulation patterns and conventions `(optional)`
 
+---
+
 - #### ECMAScript Classes
 
   - Class declaration
@@ -272,6 +284,8 @@
   - Understand difference between `class` and `constructor function`
   - Getter/setter
   - What does `super()` do and where we have to use it?
+
+---
 
 - #### Prototypal Inheritance Basics
 
@@ -284,10 +298,14 @@
   - Able to create 'class' methods using function `prototype` property
   - Able to set / get object prototype `(optional)`
 
-  - #### ECMAScript Advanced Data Types & Expressions
+---
+
+- #### ECMAScript Advanced Data Types & Expressions
 
   - `Set/Map` data types
   - `WeakSet/WeakMap` data types
+
+---
 
 - #### JavaScript Errors
 
@@ -371,6 +389,8 @@
 
     В JavaScript есть встроенные конструкторы для стандартных ошибок: Error, SyntaxError, ReferenceError, TypeError и другие. Можно использовать и их для создания объектов ошибки.
 
+---
+
 - #### ECMAScript Advanced
 
   - Promises
@@ -409,6 +429,8 @@
   - async/await
   - event loop
   - Garbage collector (concept) `(optional)`
+
+---
 
 ### JavaScript in Browser:
 
@@ -558,6 +580,19 @@
 - #### Network requests
 
   - `Fetch` (with usage)
+
+    С помощью функции `fetch()` можно отправлять сетевые запросы на сервер — как получать, так и отправлять данные. Метод возвращает промис с объектом ответа, где находится дополнительная информация (статус ответа, заголовки) и ответ на запрос. Раньше для подобной работы использовался `XMLHttpRequest`.  
+    Функция `fetch()` принимает два параметра:  
+    `url` — адрес, по которому нужно сделать запрос;  
+    `options` (необязательный) — объект конфигурации, в котором можно настроить метод запроса, тело запроса, заголовки и многое другое.
+    По умолчанию вызов `fetch()` делает GET-запрос по указанному адресу.
+
+    `options`(optional):
+
+    `method` - 'GET', 'POST', 'PUT', 'DELETE' (основные),  
+    `headers` - "Content-Type": "application/json",  
+    `body` - cors, no-cors, same-origin
+
   - `XMLHTTPRequest` (concept) `(optional)`
   - `WebSocket` (concept) `(optional)`
 
@@ -659,8 +694,37 @@
 
 - `Array.flat` implement polyfill
 - `Array.reduce` implement polyfill
+
+      Array.prototype.myReduce = function (callback, init) {
+        let accum = init;
+
+        for (let i = 0; i < this.length; i++) {
+          if (accum !== undefined) {
+            accum = callback.call(undefined, accum, this[i], i, this);
+          } else {
+            accum = this[i];
+          }
+        }
+        return accum;
+      };
+
 - `'hello world'.repeating(3)` -> 'hello world hello world hello world'. How to implement?
+
+      String.prototype.repeating = function (num) {
+        let res = '';
+        for (let i = 0; i < num; i++) {
+          res += this;
+        }
+        return res;
+      };
+
 - `myFunc('!', 4, -10, 34, 0)` -> '4!-10!34!0`. How to implement?
+
+      const myFunc = (sign, ...args) => {
+        const arr = args;
+        return arr.join(sign);
+      };
+
 - `five(plus(seven(minus(three()))))` -> 9. How to implement?
 - add(5)(9)(-4)(1) -> 11. How to implement?
 - `periodOutput(period)` method should output in the console once per every period how mach time has passed since the first function call.
